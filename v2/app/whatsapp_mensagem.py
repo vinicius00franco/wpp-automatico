@@ -48,11 +48,11 @@ class WhatsAppMensagem:
             except Exception:
                 time.sleep(1)
 
-    def enviar_mensagem_para_contato(self, nome_contato, mensagem, caminho_arquivo_pdf):
+    def enviar_mensagem_para_contato(self, identificador_contato, mensagem, caminho_arquivo_pdf):
         """
         Envia mensagem e anexa um arquivo PDF para o contato especificado.
 
-        :param nome_contato: Nome do contato conforme exibido no WhatsApp.
+        :param identificador_contato: Nome do contato conforme exibido no WhatsApp.
         :param mensagem: Mensagem de texto a ser enviada.
         :param caminho_arquivo_pdf: Caminho completo do arquivo PDF a ser anexado.
         :return: True se o envio for bem-sucedido.
@@ -67,17 +67,26 @@ class WhatsAppMensagem:
             )
             caixa_busca.click()
             self.limpar_caixa_texto(caixa_busca)
-            caixa_busca.send_keys(nome_contato)
+            caixa_busca.send_keys(identificador_contato)
             time.sleep(2)  # aguarda atualização da lista
+            
+            
 
-            # Seleciona o contato
-            contato = WebDriverWait(self.driver, 20).until(
-                EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, f'span[title="{nome_contato}"]')
+            # Tenta selecionar o contato pelo identificador (nome ou número)
+            try:
+                contato = WebDriverWait(self.driver, 5).until(
+                    EC.element_to_be_clickable(
+                        (By.CSS_SELECTOR, f'span[title="{identificador_contato}"]')
+                    )
                 )
-            )
-            contato.click()
+                contato.click()
+            except:
+                raise Exception(f"Contato '{identificador_contato}' não encontrado.")
+
             time.sleep(2)
+            
+            
+            
 
             # Envia mensagem de texto
             caixa_mensagem = WebDriverWait(self.driver, 20).until(
@@ -85,6 +94,7 @@ class WhatsAppMensagem:
                     (By.CSS_SELECTOR, 'div[contenteditable="true"][data-tab="10"]')
                 )
             )
+            
             caixa_mensagem.click()
             self.limpar_caixa_texto(caixa_mensagem)
             self.digitar_texto_com_delay(caixa_mensagem, mensagem)
@@ -122,7 +132,7 @@ class WhatsAppMensagem:
             return True
 
         except Exception as erro:
-            raise Exception(f"Erro ao enviar mensagem para {nome_contato}: {erro}")
+            raise Exception(f"Erro ao enviar mensagem para {identificador_contato}: {erro}")
 
     def salvar_resultados(self, caminho_json="resultados_envio.json"):
         """Salva os resultados dos envios em um arquivo JSON."""
