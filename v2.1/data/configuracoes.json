@@ -1,0 +1,6 @@
+{
+    "caminho_pdf": "/home/vinicius/Documentos/dev/projetos/wpp-automatico/mensagem_automatizada.pdf",
+    "caminho_perfil_chrome": "/home/vinicius/.config/google-chrome",
+    "diretorio_perfil_chrome": "Default",
+    "limite_erros_consecutivos": 3
+}

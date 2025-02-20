@@ -1,0 +1,18 @@
+{
+    "Cristiana": {
+        "status": "sucesso",
+        "erro": null
+    },
+    "Ana Carolina": {
+        "status": "sucesso",
+        "erro": null
+    },
+    "Matheus Franco": {
+        "status": "sucesso",
+        "erro": null
+    },
+    "+55 11 98942-2056": {
+        "status": "erro",
+        "erro": "Erro ao enviar mensagem para +55 11 98942-2056: Contato '+55 11 98942-2056' não encontrado."
+    }
+}
