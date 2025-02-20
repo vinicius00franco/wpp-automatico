@@ -1,0 +1,28 @@
+# Ignore Python compiled files
+*.pyc
+__pycache__/
+
+# Ignore virtual environments
+whatsapp_automation/
+env/
+
+# Ignore logs
+*.log
+
+# Ignore IDE-specific files (e.g., VS Code)
+.vscode/
+*.code-workspace
+
+# Ignore node_modules if applicable (for JavaScript dependencies)
+node_modules/
+
+# Ignore any build/output directories
+dist/
+build/
+
+# Ignore temporary files
+*.tmp
+*.bak
+
+# Ignore specific files or directories for your project
+mensajes.json  # If you want to ignore this JSON file
